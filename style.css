@@ -121,3 +121,28 @@ nav ul li a:hover, a.active{
     display: flex;
     justify-content: space-between;
 }
+#message{
+    display: none;
+    background-color: #f9f9f9;
+    margin-top: 100px;
+    margin-left: 200px;
+    position: absolute;
+    height: 700px;
+    width: 700px;
+    display: hidden;
+}
+.logo {
+    margin: 0px 190px;
+    position: relative;
+    font-size: 320px;
+    color: #74f356;
+    text-shadow: 0px 0px 10px #13ff13;
+}
+.congrats-text {
+    text-align: center;
+    font-size: 38px;
+    color: #14d114;
+    font-weight: 800;
+    font-family: 'Londrina Solid', cursive;
+    text-shadow: 0px 0px 10px;
+}

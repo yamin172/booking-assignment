@@ -106,7 +106,11 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="book" class="btn-style">Book Now</button>
+        </div>
+        <div id="message">
+            <span class="logo"><i class="far fa-check-circle"></i></span>
+            <h2 class="congrats-text"> CONGRATULATION</h2>
         </div>
     </main>
 
@@ -159,6 +163,11 @@
             const grandTotal = totalCount + vat;
             document.getElementById('grand-total').innerText = '$' + grandTotal;
         };
+        const bookBtn = document.getElementById('book');
+        bookBtn.addEventListener('click', function(){
+            const message = document.getElementById('message');
+            message.style.display = "block";
+        })
     </script>
 </body>
 
