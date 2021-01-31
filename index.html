@@ -63,8 +63,8 @@
                     <input id="first-count" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="handleTicketChange('first', true)" class="btn btn-defult bg-transparent"><i class="fas fa-plus"></i></button>
-                    <button onclick="handleTicketChange('first', false)" class="btn btn-defult bg-transparent"><i class="fas fa-minus"></i></button>
+                    <button onclick="handleTicketFirstChange(true)" class="btn btn-defult bg-transparent"><i class="fas fa-plus"></i></button>
+                    <button onclick="handleTicketFirstChange(false)" class="btn btn-defult bg-transparent"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -74,8 +74,8 @@
                     <input id="economy-count" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="handleTicketChange('economy', true)" class="btn btn-defult bg-transparent"><i class="fas fa-plus"></i></button>
-                    <button onclick="handleTicketChange('economy', false)" class="btn btn-defult bg-transparent"><i class="fas fa-minus"></i></button>
+                    <button onclick="handleTicketEconomyChange(true)" class="btn btn-defult bg-transparent"><i class="fas fa-plus"></i></button>
+                    <button onclick="handleTicketEconomyChange(false)" class="btn btn-defult bg-transparent"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="calculations">
@@ -93,7 +93,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p id="vat-amount">$0</p>
                     </div>
                 </div>
                 <hr>
@@ -102,7 +102,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id="grand-total">$0</p>
                     </div>
                 </div>
             </div>
@@ -112,28 +112,6 @@
 
     <!--Thank You-->
     <script>
-        function handleTicketChange(ticket,isIncrease){
-            const ticketInput = document.getElementById(ticket + '-count');
-            const ticketCount = parseInt(ticketInput.value);
-            let ticketNewCount = ticketCount;
-            if(isIncrease == true){
-                ticketNewCount = ticketCount + 1;
-            }
-            if(isIncrease == false && ticketCount > 0){
-                ticketNewCount = ticketCount - 1;
-            }
-            ticketInput.value = ticketNewCount;
-            let ticketTotal = 0;
-            if(ticket == 'first'){
-                ticketTotal = ticketNewCount * 150;
-            }
-            if(ticket == 'economy'){
-                ticketTotal = ticketNewCount * 100;
-            }
-            document.getElementById(ticket + '-total').innerText = '$' + ticketTotal;
-        };
-
-/*
         function handleTicketFirstChange(isIncrease){
             const ticketFirstInput = document.getElementById('first-count');
             const ticketFirstCount = parseInt(ticketFirstInput.value);
@@ -147,6 +125,7 @@
             ticketFirstInput.value = ticketFirstNewCount;
             const ticketFirstTotal = ticketFirstNewCount * 150;
             document.getElementById('price-total').innerText = '$' + ticketFirstTotal;
+            calculateTotal();
         };
 
         function handleTicketEconomyChange(isIncrease){
@@ -162,27 +141,24 @@
             ticketEconomyInput.value = ticketEconomyNewCount;
             const ticketEconomyTotal = ticketEconomyNewCount * 100;
             document.getElementById('price-total').innerText = '$' + ticketEconomyTotal;
+            calculateTotal();
         };
-*/      
+        function calculateTotal(){
+            const firstInput = document.getElementById('first-count');
+            const firstCount = parseInt(firstInput.value);
 
-/*
-        document.getElementById('ticket-increase').addEventListener('click', function(){
-            const ticketInput = document.getElementById('ticket-count');
-            const ticketCount = parseInt(ticketInput.value);
-            const ticketNewCount = ticketCount + 1;
-            ticketInput.value = ticketNewCount;
-            const ticketTotal = ticketNewCount * 100;
-            document.getElementById('ticket-total').innerText = '$' + ticketTotal;
-        });
-        document.getElementById('ticket-decrease').addEventListener('click', function(){
-            const ticketInput = document.getElementById('ticket-count');
-            const ticketCount = parseInt(ticketInput.value);
-            const ticketNewCount = ticketCount - 1;
-            ticketInput.value = ticketNewCount;
-            const ticketTotal = ticketNewCount * 100;
-            document.getElementById('ticket-total').innerText = '$' + ticketTotal;
-        });
-*/
+            const economyInput = document.getElementById('economy-count');
+            const economyCount = parseInt(economyInput.value);
+
+            const totalCount = firstCount * 150 + economyCount * 100;
+            document.getElementById('price-total').innerText = '$' + totalCount;
+
+            const vat = totalCount * 0.1;
+            document.getElementById('vat-amount').innerText = '$' + vat;
+
+            const grandTotal = totalCount + vat;
+            document.getElementById('grand-total').innerText = '$' + grandTotal;
+        };
     </script>
 </body>
 
